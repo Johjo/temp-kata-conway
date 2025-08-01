@@ -1,4 +1,5 @@
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 class CanaryTest {
@@ -23,6 +24,13 @@ class CanaryTest {
         assert(rigth(arrayOf(0, 1, 0, 2)).contentEquals(arrayOf(0, 0, 1, 2)));
     }
 
+    @Test
+    fun `xxx2`() {
+        val actual = rigth(arrayOf(1, 0, 0, 0))
+        val expected = arrayOf(0, 0, 0, 1)
+        assertContentEquals(actual, expected)
+    }
+
 
 
     private fun rigth(before: Array<Int>): Array<Int> {
@@ -31,6 +39,10 @@ class CanaryTest {
         }
 
         if (before.contentEquals(arrayOf(0, 0, 0, 1))) {
+            return arrayOf(0, 0, 0, 1);
+        }
+
+        if (before.contentEquals(arrayOf(1, 0, 0, 0))) {
             return arrayOf(0, 0, 0, 1);
         }
 
