@@ -38,13 +38,26 @@ class CanaryTest {
 
     private fun rigth(before: Array<Int>): Array<Int> {
         if (before.contentEquals(arrayOf(0, 1, 0, 2))) {
-            return arrayOf(0, 0, 1, 2);
+            val after = mutableListOf<Int>();
+            after.add(0)
+            after.add(0)
+            after.add(1)
+            after.add(2)
+            return after.toTypedArray()
+        } else if (before.contains(1)) {
+            val after = mutableListOf<Int>();
+            after.add(0)
+            after.add(0)
+            after.add(0)
+            after.add(1)
+            return after.toTypedArray()
+        } else {
+            val after = mutableListOf<Int>();
+            after.add(0)
+            after.add(0)
+            after.add(0)
+            after.add(0)
+            return after.toTypedArray()
         }
-
-        if (before.contains(1)) {
-            return arrayOf(0, 0, 0, 1);
-        }
-
-        return arrayOf(0, 0, 0, 0)
     }
 }
