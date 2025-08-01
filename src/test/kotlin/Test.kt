@@ -1,6 +1,5 @@
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
 
 class CanaryTest {
     @Test
@@ -92,6 +91,18 @@ class CanaryTest {
         val expected = arrayOf(0, 3, 2, 4)
         assertContentEquals(expected, actual)
     }
+    @Test
+    fun `xxx10`() {
+        val actual = rigth(arrayOf(1, 2, 3, 4))
+        val expected = arrayOf(1, 2, 3, 4)
+        assertContentEquals(expected, actual)
+    }
+    @Test
+    fun `xxx11`() {
+        val actual = rigth(arrayOf(1, 1, 4, 0))
+        val expected = arrayOf(0, 0, 2, 4)
+        assertContentEquals(expected, actual)
+    }
 
 
 
@@ -110,31 +121,21 @@ class CanaryTest {
     }
 
     private fun merge(after: MutableList<Int>): MutableList<Int> {
-        var after1 = mutableListOf<Int>()
-        if (after.equals(mutableListOf(2, 2)))
-            after1.add(after[0] + after[1])
-        else if (after.equals(mutableListOf(1, 1)))
-            after1.add(after[0] + after[1])
-        else if (after.equals(mutableListOf(1, 1, 4))) {
-            after1.add(after[0] + after[1])
-            if(after.size > 2) after1.add(after[2])
-            if(after.size > 3) after1.add(after[3])
+        var bis = mutableListOf<Int>();
+        var i = 0
+
+        while (after.size > i) {
+            if (after.size == i + 1 || after[i] != after[i + 1]) {
+                bis.add(after[i])
+                i ++
+            } else {
+                bis.add(after[i] + after[i + 1])
+                i += 2;
+            }
         }
-        else if (after.equals(mutableListOf(3, 1, 1, 4))) {
-            after1.add(3)
-            if(after.size > 1 && false) after1.add(after[1])
-            if(after.size > 2 && after[1] == after[2]) after1.add(after[1] + after[2])
-            if(after.size > 2 && after[2] != after[1]) after1.add(after[2])
-            if(after.size > 3) after1.add(after[3])
-        }
-        else {
-            if(after.size > 0) after1.add(after[0])
-            if(after.size > 1 && true) after1.add(after[1])
-            if(after.size > 2 && after[1] == after[2]) after1.add(after[1] + after[2])
-            if(after.size > 2 && after[2] != after[1]) after1.add(after[2])
-            if(after.size > 3) after1.add(after[3])
-        }
-        return after1
+
+        return bis
+
     }
 
     private fun complete(after: MutableList<Int>): Array<Int> {
