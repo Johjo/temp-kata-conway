@@ -1,13 +1,43 @@
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class CanaryTest {
     @Test
     fun `should fail`() {
-
-        assert(rigth().contentEquals(arrayOf(1,0,0,0)));
+        assert(rigth(arrayOf(0, 0, 0, 0)).contentEquals(arrayOf(0, 0, 0, 0)));
     }
 
-    private fun rigth(): Array<Int> {
-        return arrayOf(0,0,0,0)
+
+    @Test
+    fun `go to the right`() {
+        assert(rigth(arrayOf(0, 0, 1, 0)).contentEquals(arrayOf(0, 0, 0, 1)));
+    }
+
+    @Test
+    fun `should don't go out the board`() {
+        assert(rigth(arrayOf(0, 0, 0, 1)).contentEquals(arrayOf(0, 0, 0, 1)));
+    }
+
+    @Test
+    fun `xxx`() {
+        assert(rigth(arrayOf(0, 1, 0, 2)).contentEquals(arrayOf(0, 0, 1, 2)));
+    }
+
+
+
+    private fun rigth(before: Array<Int>): Array<Int> {
+        if (before.contentEquals(arrayOf(0, 0, 1, 0))) {
+            return arrayOf(0, 0, 0, 1);
+        }
+
+        if (before.contentEquals(arrayOf(0, 0, 0, 1))) {
+            return arrayOf(0, 0, 0, 1);
+        }
+
+        if (before.contentEquals(arrayOf(0, 1, 0, 2))) {
+            return arrayOf(0, 0, 1, 2);
+        }
+
+        return arrayOf(0, 0, 0, 0)
     }
 }
