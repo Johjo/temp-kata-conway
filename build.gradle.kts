@@ -2,7 +2,7 @@ version = "1.0-SNAPSHOT"
 group = "nl.codecraftr"
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.2.0"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 
     application
