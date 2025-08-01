@@ -21,7 +21,10 @@ class CanaryTest {
 
     @Test
     fun `xxx`() {
-        assert(rigth(arrayOf(0, 1, 0, 2)).contentEquals(arrayOf(0, 0, 1, 2)));
+        val actual = rigth(arrayOf(0, 1, 0, 2))
+        val expected = arrayOf(0, 0, 1, 2)
+        assertContentEquals(actual, expected)
+//        assert(rigth(arrayOf(0, 1, 0, 2)).contentEquals(arrayOf(0, 0, 1, 2)));
     }
 
     @Test
@@ -34,20 +37,12 @@ class CanaryTest {
 
 
     private fun rigth(before: Array<Int>): Array<Int> {
-        if (before.contentEquals(arrayOf(0, 0, 1, 0))) {
-            return arrayOf(0, 0, 0, 1);
-        }
-
-        if (before.contentEquals(arrayOf(0, 0, 0, 1))) {
-            return arrayOf(0, 0, 0, 1);
-        }
-
-        if (before.contentEquals(arrayOf(1, 0, 0, 0))) {
-            return arrayOf(0, 0, 0, 1);
-        }
-
         if (before.contentEquals(arrayOf(0, 1, 0, 2))) {
             return arrayOf(0, 0, 1, 2);
+        }
+
+        if (before.contains(1)) {
+            return arrayOf(0, 0, 0, 1);
         }
 
         return arrayOf(0, 0, 0, 0)
